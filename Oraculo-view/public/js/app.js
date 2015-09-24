@@ -1,0 +1,1 @@
+angular.module("oraculo", ["ngRoute", "ngMessages", "ui.bootstrap"]);

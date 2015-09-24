@@ -1,0 +1,25 @@
+body {
+    padding-top: 80px;
+    padding-bottom: 20px;
+
+}
+.colorB{
+	color: #45ADA8;
+}
+
+.camposModal{
+	margin-top: 5px;
+}
+
+.alinhar{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+a.nounderline:link { 
+ text-decoration:none; 
+ color: #2C3E50;
+} 
+

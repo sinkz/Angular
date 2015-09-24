@@ -1,0 +1,25 @@
+{
+  "name": "Oraculo",
+  "version": "0.0.0",
+  "authors": [
+    "Adiego <diih_augusto@live.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.4.6",
+    "angular-mocks": "~1.4.6",
+    "angular-resource": "~1.4.6",
+    "angular-route": "~1.4.6",
+    "bootstrap": "~3.3.5",
+    "jquery": "~2.1.4",
+    "jquery-ui": "~1.11.4"
+  }
+}
