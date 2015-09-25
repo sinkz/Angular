@@ -3,11 +3,6 @@ angular.module("oraculo").config(function($routeProvider){
 	$routeProvider.when("/home", {
 		templateUrl: "public/views/colaborador.html",
 		controller: "colaboradorController",
-		resolve:{
-			colaboradores: function(colaboradorAPI){
-				return colaboradorAPI.getColaboradores();
-			}
-		}
 		
 		
 	});

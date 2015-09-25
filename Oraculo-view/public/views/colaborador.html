@@ -1,6 +1,6 @@
 
 <div class="panel-heading">
-   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Novo Registro </button>
+   <button type="button" ng-click="limparColaborador()" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Novo Registro </button>
    <!-- Modal -->
    <div id="myModal" class="modal fade" role="dialog" >
       <div class="modal-dialog">
@@ -42,7 +42,8 @@
 </div>
 
 <div class="panel-body">
-    <input class="form-control" type="text" ng-model="criterioDeBusca" placeholder="O que você está buscando?"/>
+    <input class="form-control" type="text" ng-model="criterioDeBusca" placeholder="Quem você está buscando?" 
+     ng-keyup="filtrar(criterioDeBusca, currentPage)"/>
     <div class="table-responsive">
    <table class="table table-hover" ng-show="colaboradores.length > 0">
       <thead>
@@ -54,13 +55,13 @@
          </tr>
       </thead>
       <tbody>
-         <tr ng-repeat="colaborador in colaboradores | filter:criterioDeBusca | orderBy:criterioOrdenacao:direcaoOrdenacao" 
+         <tr ng-repeat="colaborador in colaboradores | orderBy:criterioOrdenacao:direcaoOrdenacao" 
          id="_colaborador">
             <th scope="row">{{colaborador.codigo}}</th>
             <td><a class="nounderline" href="#/detalhesColaborador/{{colaborador.codigo}}">{{colaborador.nome}}</a></td>
             <td>{{colaborador.setor}}</td>
             <td>
-               <a id="_editar" ng-click="edit(empresa)" class="btn btn-default" role="button" title="Editar">
+               <a id="_editar" data-toggle="modal" ng-click="pegaDadosEdicao(colaborador)" data-target="#myModal" class="btn btn-default" role="button" title="Editar">
                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                </a>
                <a id="_remover" ng-click="excluir(colaborador)" class="btn btn-default" role="button" title="Remover">
@@ -71,7 +72,8 @@
          </tr>
       </tbody>
    </table>
-<pagination total-items="totalItems" ng-model="currentPage" max-size="tamanhoMaximo" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" ng-click="loading(currentPage)"></pagination>
+   
+<pagination total-items="totalItems" ng-model="currentPage" max-size="tamanhoMaximo" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" ng-click="loading(currentPage, criterioDeBusca)" items-per-page="5"></pagination>
 <pre>Page: {{currentPage}} / {{numPages}}</pre>
 </div>
 </div>

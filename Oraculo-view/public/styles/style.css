@@ -23,3 +23,12 @@ a.nounderline:link {
  color: #2C3E50;
 } 
 
+.pagination > .disabled > span, .pagination > .disabled > span:hover, .pagination > .disabled > span:focus, .pagination > .disabled > a, .pagination > .disabled > a:hover, .pagination > .disabled > a:focus{
+	background-color: #1A242F;
+}
+
+.img{
+	height: 40%;
+	 float:right;
+}
+

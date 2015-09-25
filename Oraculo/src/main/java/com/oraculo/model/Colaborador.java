@@ -11,6 +11,7 @@ import javax.persistence.Table;
 @Entity
 @Table
 @NamedQueries({ @NamedQuery(name = "Colaborador.listar", query = "SELECT colaborador FROM Colaborador colaborador"),
+		@NamedQuery(name = "Colaborador.listarComFiltro", query = "SELECT colaborador FROM Colaborador colaborador WHERE colaborador.nome like :nome OR colaborador.setor like :setor"),
 		@NamedQuery(name = "Colaborador.buscarCodigo", query = "SELECT colaborador FROM Colaborador colaborador WHERE colaborador.codigo = :codigo") })
 public class Colaborador {
 	@Id

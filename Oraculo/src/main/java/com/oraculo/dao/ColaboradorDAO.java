@@ -11,6 +11,7 @@ import com.oraculo.model.Colaborador;
 import com.oraculo.util.HibernateUtil;
 
 public class ColaboradorDAO {
+	Integer guarda = 0;
 
 	public void salvar(Colaborador colaborador) {
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
@@ -29,43 +30,92 @@ public class ColaboradorDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Colaborador> listarColaboradores() {
-	    List<Colaborador> lista = new ArrayList<>();
-	    Session sessao = HibernateUtil.getSessionFactory().openSession();
-	    Transaction transacao = null;
-
-	    try {
-	        transacao = sessao.beginTransaction();
-	        Query consulta = sessao.getNamedQuery("Colaborador.listar");
-	       
-	        lista = consulta.list();
-	        transacao.commit();
-	    } catch (RuntimeException ex) {
-	        ex.printStackTrace();
-	        throw ex;
-	    } finally {
-	        sessao.close();
-	    }
-	    return lista;
+	public List<Colaborador> listarColaboradores(Integer paginaInicio, Integer count) {
+		List<Colaborador> lista = new ArrayList<>();
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		Transaction transacao = null;
+		System.out.println("PaginaInicio: " + paginaInicio);
+		try {
+			transacao = sessao.beginTransaction();
+			Query consulta = sessao.getNamedQuery("Colaborador.listar");
+			consulta.setFirstResult((paginaInicio - 1) * 5);
+			consulta.setMaxResults(count);
+			lista = consulta.list();
+			transacao.commit();
+		} catch (RuntimeException ex) {
+			ex.printStackTrace();
+			throw ex;
+		} finally {
+			sessao.close();
+			guarda = paginaInicio;
+		}
+		return lista;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Colaborador> listarColaboradoresConsulta() {
-	    List<Colaborador> lista = new ArrayList<>();
-	    Session sessao = HibernateUtil.getSessionFactory().openSession();
-	    Transaction transacao = null;
-	    try {
-	        transacao = sessao.beginTransaction();
-	        Query consulta = sessao.getNamedQuery("Colaborador.listar");
-	        lista = consulta.list();     
-	        transacao.commit();
-	    } catch (RuntimeException ex) {
-	        ex.printStackTrace();
-	        throw ex;
-	    } finally {
-	        sessao.close();
-	    }
-	    return lista;
+		List<Colaborador> lista = new ArrayList<>();
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		Transaction transacao = null;
+		try {
+			transacao = sessao.beginTransaction();
+			Query consulta = sessao.getNamedQuery("Colaborador.listar");
+			lista = consulta.list();
+			transacao.commit();
+		} catch (RuntimeException ex) {
+			ex.printStackTrace();
+			throw ex;
+		} finally {
+			sessao.close();
+		}
+		return lista;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Colaborador> listarColaboradoresFiltro(String nome, Integer paginaInicio, Integer count) {
+		List<Colaborador> lista = new ArrayList<>();
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		Transaction transacao = null;
+		try {
+			transacao = sessao.beginTransaction();
+			System.out.println("Pagina filtro: " + paginaInicio);
+			Query consulta = sessao.getNamedQuery("Colaborador.listarComFiltro");
+			consulta.setParameter("nome", "%" + nome + "%");
+			consulta.setParameter("setor", "%" + nome + "%");
+			consulta.setFirstResult((paginaInicio - 1) * 5);
+			consulta.setMaxResults(count);
+			lista = consulta.list();
+			System.out.println("Resultado: " + lista);
+			transacao.commit();
+		} catch (RuntimeException ex) {
+			ex.printStackTrace();
+			throw ex;
+		} finally {
+			sessao.close();
+		}
+		return lista;
+	}
+
+	// Verifica quantos colaboradores estão na pesquisa
+	@SuppressWarnings("unchecked")
+	public List<Colaborador> listarColaboradoresFiltro(String nome) {
+		List<Colaborador> lista = new ArrayList<>();
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		Transaction transacao = null;
+		try {
+			transacao = sessao.beginTransaction();
+			Query consulta = sessao.getNamedQuery("Colaborador.listarComFiltro");
+			consulta.setParameter("nome", "%" + nome + "%");
+			consulta.setParameter("setor", "%" + nome + "%");
+			lista = consulta.list();
+			transacao.commit();
+		} catch (RuntimeException ex) {
+			ex.printStackTrace();
+			throw ex;
+		} finally {
+			sessao.close();
+		}
+		return lista;
 	}
 
 	public Colaborador buscarColaborador(Integer codigo) {
@@ -115,7 +165,7 @@ public class ColaboradorDAO {
 		try {
 			transacao = sessao.beginTransaction();
 			Colaborador colaboradorEditar = buscarColaborador(colaborador.getCodigo());
-			System.out.println("Nome: " + colaborador.getNome());
+			System.out.println("TESTE: "+colaboradorEditar);
 			colaboradorEditar.setNome(colaborador.getNome());
 			colaboradorEditar.setSetor(colaborador.getSetor());
 			colaboradorEditar.setSenhaEmail(colaborador.getSenhaEmail());
