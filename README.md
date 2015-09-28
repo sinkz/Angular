@@ -17,7 +17,9 @@ Maven
 
 1. Criar database bd_oraculo no mysql;
 2. Configurar o arquivo hibernate.cfg que está em src/main/resources, utilizar create no lugar de validate quando for rodar pela primeira vez;
-3. Configurar o ip do Endpoint que fica no arquivo configValue.js
+3. Configurar o ip do Endpoint que fica no arquivo configValue.js;
+4. Criar uma pasta chamada upload dentro do diretorio oraculo-view;
+5. Alterar o atributo DIRETORIO_UPLOAD que fica na Classe ColaboradorController com o diretorio da pasta upload que foi criada.
 
 
 #Sugestões:
