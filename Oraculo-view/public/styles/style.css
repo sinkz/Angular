@@ -28,7 +28,7 @@ a.nounderline:link {
 }
 
 .img{
-	height: 40%;
+	height: auto;
 	 float:right;
 }
 
