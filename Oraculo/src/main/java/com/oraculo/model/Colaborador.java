@@ -30,6 +30,8 @@ public class Colaborador {
 	private String senhaEmail;
 	@Column(nullable = false, length = 30)
 	private String setor;
+	@Column(nullable = true, length = 200)
+	private String arquivo;
 
 	public Integer getCodigo() {
 		return codigo;
@@ -86,11 +88,23 @@ public class Colaborador {
 	public void setSetor(String setor) {
 		this.setor = setor;
 	}
+	
+
+	public String getArquivo() {
+		return arquivo;
+	}
+
+	public void setArquivo(String arquivo) {
+		this.arquivo = arquivo;
+	}
 
 	@Override
 	public String toString() {
 		return "Colaborador [codigo=" + codigo + ", nome=" + nome + ", userSkype=" + userSkype + ", senhaSype="
-				+ senhaSype + ", userEmail=" + userEmail + ", senhaEmail=" + senhaEmail + ", setor=" + setor + "]";
+				+ senhaSype + ", userEmail=" + userEmail + ", senhaEmail=" + senhaEmail + ", setor=" + setor
+				+ ", arquivo=" + arquivo + "]";
 	}
+
+	
 
 }

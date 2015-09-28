@@ -24,8 +24,8 @@ angular.module("oraculo").factory("colaboradorAPI", function ($http, config) {
 		return $http.get(config.baseURL + "/Oraculo/colaborador/colaborador/" +codigo);
 	};
 
-	var _deleteColaborador = function(codigo){
-		return  $http.delete(config.baseURL +"/Oraculo/colaborador/" + codigo);
+	var _deleteColaborador = function(codigo, arquivo){
+		return  $http.delete(config.baseURL +"/Oraculo/colaborador/" + codigo+"/"+arquivo);
 	}
 
 	var _editaColaborador = function(codigo, colaborador){
