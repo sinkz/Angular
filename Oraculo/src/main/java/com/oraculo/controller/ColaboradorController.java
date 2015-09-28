@@ -38,7 +38,7 @@ public class ColaboradorController {
 	@Inject
 	private ColaboradorDAO colaboradorDAO;
 
-	final String DIRETORIO_UPLOAD = "C:\\Desenvolvimento\\Angular\\Oraculo-view\\upload\\";
+	final String DIRETORIO_UPLOAD = "C:\\Users\\Diego\\Documents\\GitHub\\Angular\\Oraculo-view\\upload\\";
 
 	@Get
 	@Path("/colaboradores/{paginaInicio}")
@@ -81,7 +81,7 @@ public class ColaboradorController {
 		System.out.println("colaborador: " + arquivo);
 		try {
 			colaboradorDAO.excluir(codigo);
-			String nome = "C:\\Desenvolvimento\\Angular\\Oraculo-view\\upload\\" + arquivo;
+			String nome = DIRETORIO_UPLOAD + arquivo;
 			File f = new File(nome);
 			f.delete();
 		} catch (Exception ex) {

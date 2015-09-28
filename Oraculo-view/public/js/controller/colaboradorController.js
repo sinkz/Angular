@@ -162,7 +162,7 @@ angular.module("oraculo").controller("colaboradorController", function($scope, $
     var salvarImagem = function(file) {
         if (file && !file.$error) {
             file.upload = Upload.upload({
-                url: 'http://10.80.117.123:8080/Oraculo/colaborador/imagem',
+                url: 'http://localhost:8080/Oraculo/colaborador/imagem',
                 data: {
                     file: file
                 }
