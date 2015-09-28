@@ -11,6 +11,8 @@ mysql.
 
 tomcat 8.
 
+Maven
+
 #Configuração:
 
 1. Criar database bd_oraculo no mysql;
