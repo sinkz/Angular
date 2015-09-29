@@ -1,0 +1,15 @@
+<div class = "container">
+	<div class="wrapper">
+		<form  method="post" name="Login_Form" class="form-signin" role="form">       
+		    <h3 class="form-signin-heading">Bem Vindo!</h3>
+			  <hr class="colorgraph"><br>
+			  
+			  <input type="text" class="form-control" name="Username" placeholder="Username" required="true" autofocus="" 
+			  ng-model="usuario.login"/>
+			  <input type="password" class="form-control" name="Password" placeholder="Password" required="true"
+			  ng-model="usuario.senha"/>     		  			 
+			  <button class="btn btn-lg btn-primary btn-block"  name="Submit" value="Login" type="Submit"
+			  ng-click="autenticar(usuario)">Login</button>  			
+		</form>			
+	</div>
+</div>

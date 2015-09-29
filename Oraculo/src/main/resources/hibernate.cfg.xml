@@ -40,6 +40,7 @@
 		<property name="hbm2ddl.auto">validate</property>
 
 		<mapping class="com.oraculo.model.Colaborador" />
+		<mapping class="com.oraculo.model.Usuario" />
 		
 
 		

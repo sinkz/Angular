@@ -1,4 +1,6 @@
 angular.module("oraculo").config(function($routeProvider){
+
+
 	
 	$routeProvider.when("/home", {
 		templateUrl: "public/views/colaborador.html",
@@ -17,7 +19,12 @@ angular.module("oraculo").config(function($routeProvider){
 		}
 	});
 
+	$routeProvider.when("/login", {
+		templateUrl: "public/views/login.html",
+		controller: "loginCtrl"
+	});
 
-	$routeProvider.otherwise({redirectTo: "/home"});
+
+	$routeProvider.otherwise({redirectTo: "/login"});
 
 });
