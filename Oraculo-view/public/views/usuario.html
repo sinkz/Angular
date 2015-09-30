@@ -1,0 +1,36 @@
+
+<div ng-class="classAlert" ng-show="submitted || showAlert" >{{message}}
+    <button class="close" data-dismiss="alert">x</button>
+  </div>
+<h1 class="titulo">Novo Usuário</h1>
+<div class="alinhar">
+<form class="form-group" role="form" name="colaboradorForm" enctype="multipart/form-data">
+
+   <div class="form-group">
+      <input class="form-control" type="text" name="nome" placeholder="Nome" ng-required="true" ng-model="usuario.nome" />
+   </div>
+
+   <div class="form-group">
+      <input class="form-control" type="text" name="login" placeholder="Login"  ng-required="true" ng-model="usuario.login" />
+   </div>
+
+   <div class="form-group">
+      <input class="form-control" type="password" name="senha" placeholder="Senha"  ng-required="true" ng-model="usuario.senha" />
+   </div>
+
+   <div class="form-group" ng-class="cssClass">
+      <input class="form-control" type="password" name="confirmSenha" placeholder="Confirmar Senha" ng-required="true" ng-model="confirmarSenha" ng-blur="verificaSenha(usuario, $event, showAlert)"/>
+   </div>
+
+   <div class="form-group">
+      <input class="form-control" type="text" name="permissao" placeholder="Permissão" ng-required="true" ng-model="usuario.permissao" />
+   </div>
+
+   <div class="form-group">
+      <button class="btn btn-primary btn-block" ng-click="salvar(usuario)" ng-disabled="colaboradorForm.$invalid || !senhasIguais">
+      <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
+      Salvar
+      </button>
+   </div>
+</form>
+</div>

@@ -1,15 +1,47 @@
+ <div class="container">
+         <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+               <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                     aria-controls="navbar">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="#/">Oraculo</a>
+               </div>
+               <div id="navbar" class="navbar-collapse collapse">
+                  <ul class="nav navbar-nav">
+                     <li class="active">
+                        <a href="#/">Entrar</a>
+                     </li>
+                  </ul>
+                  <ul class="nav navbar-nav navbar-right">
+                     <li>
+                     <a href="#/">Sobre</a>        
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </nav>
 <div class = "container">
 	<div class="wrapper">
 		<form  method="post" name="Login_Form" class="form-signin" role="form">       
 		    <h3 class="form-signin-heading">Bem Vindo!</h3>
-			  <hr class="colorgraph"><br>
-			  
+			  <hr class="colorgraph"></hr>
+
+			   <div ng-class="classAlert" ng-show="submitted || showAlert" >{{message}}
+    				<button class="close" data-dismiss="alert">x</button>
+  				</div>
+
 			  <input type="text" class="form-control" name="Username" placeholder="Username" required="true" autofocus="" 
 			  ng-model="usuario.login"/>
 			  <input type="password" class="form-control" name="Password" placeholder="Password" required="true"
 			  ng-model="usuario.senha"/>     		  			 
 			  <button class="btn btn-lg btn-primary btn-block"  name="Submit" value="Login" type="Submit"
-			  ng-click="autenticar(usuario)">Login</button>  			
+			  ng-click="autenticar(usuario)">Login</button>  
+			 		
 		</form>			
 	</div>
+</div>
 </div>

@@ -20,42 +20,22 @@
       <script src="public/js/app.js"></script>
       <script src="public/js/controller/colaboradorController.js"></script>
       <script src="public/js/controller/detalhesColaboradorController.js"></script>
+      <script src="public/js/controller/indexController.js"></script>
+      <script src="public/js/controller/usuarioController.js"></script>
+
       <script src="public/js/controller/loginController.js"></script>
       <script src="public/js/config/routeConfig.js"></script>
       <script src="public/js/services/colaboradorService.js"></script>
       <script src="public/js/services/usuarioService.js"></script>
+      <script src="public/js/services/authService.js"></script>
       <script src="public/js/value/configValue.js"></script>
 
    </head>
    <body>
-      <div class="container">
-         <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container">
-               <div class="navbar-header">
-                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-                     aria-controls="navbar">
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  </button>
-                  <a class="navbar-brand" href="#/">Oraculo</a>
-               </div>
-               <div id="navbar" class="navbar-collapse collapse">
-                  <ul class="nav navbar-nav">
-                     <li class="active">
-                        <a href="#/home">Home</a>
-                     </li>
-                  </ul>
-                  <ul class="nav navbar-nav navbar-right">
-                     <li>
-                     <li><a href="#">Sobre</a></li>
-                     </li>
-                  </ul>
-               </div>
-            </div>
-         </nav>
-
+       <div class="container">
+         <div ng-controller="loginCtrl" ng-include="'public/views/navBar.html'"></div>
          <div ng-view></div>
+      </div>
          
       </div>
    </body>

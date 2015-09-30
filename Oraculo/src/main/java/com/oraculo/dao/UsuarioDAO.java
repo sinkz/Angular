@@ -13,7 +13,6 @@ import com.oraculo.util.HibernateUtil;
 
 public class UsuarioDAO {
 	
-
 	public void salvar(Usuario usuario) {
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		Transaction transacao = null;

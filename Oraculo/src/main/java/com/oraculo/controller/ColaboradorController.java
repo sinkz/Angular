@@ -1,19 +1,12 @@
 package com.oraculo.controller;
 
 import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-
 import javax.inject.Inject;
 import javax.transaction.Transactional;
-
-import org.apache.commons.io.IOUtils;
-
 import com.oraculo.dao.ColaboradorDAO;
 import com.oraculo.model.Colaborador;
 
@@ -71,7 +64,7 @@ public class ColaboradorController {
 	@Get
 	@Path("/colaborador/{codigo}")
 	public void listarColaborador(Integer codigo) {
-		result.use(Results.json()).withoutRoot().from(colaboradorDAO.buscarColaborador(codigo)).serialize();
+		result.use(Results.json()).withoutRoot().from(colaboradorDAO.buscarColaborador(codigo)).include("usuario").serialize();
 
 	}
 

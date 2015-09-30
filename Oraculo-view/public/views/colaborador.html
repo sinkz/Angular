@@ -9,7 +9,7 @@
          <!-- Modal content-->
          <div class="modal-content">
             <div class="modal-header">
-               <button type="button" class="close" data-dismiss="modal">&times;</button>
+               <button type="button" class="close" data-dismiss="modal">x</button>
                <h4 class="modal-title">Novo Colaborador</h4>
             </div>
             <div class="alinhar">
@@ -30,8 +30,6 @@
                   <button type="file" class="btn btn-primary botao" ngf-select="uploadFiles($file)"
                      accept="image/*" ngf-max-height="2000" ngf-max-size="2MB">
                   Selecionar</button>
-                  <br><br>
-                  Arquivo:
                   <div style="font:smaller">
                      {{f.name}} {{f.$error}} {{f.$errorParam}}
                      <span class="progress" ng-show="f.progress >= 0">
@@ -39,6 +37,7 @@
                            ng-bind="f.progress + '%'"></div>
                      </span>
                   </div>
+
                   {{errorMsg}}
                </form>
             </div>
@@ -52,9 +51,11 @@
       </div>
    </div>
 </div>
+
 <div class="panel-heading">
    <h3 class="panel-title">Colaboradores</h3>
 </div>
+
 <div class="panel-body">
    <input class="form-control" type="text" ng-model="criterioDeBusca" placeholder="Quem você está buscando?" 
       ng-keyup="filtrar(criterioDeBusca, currentPage)"/>
@@ -75,10 +76,10 @@
                <td><a class="nounderline" href="#/detalhesColaborador/{{colaborador.codigo}}">{{colaborador.nome}}</a></td>
                <td>{{colaborador.setor}}</td>
                <td>
-                  <a id="_editar" data-toggle="modal" ng-click="pegaDadosEdicao(colaborador)" data-target="#myModal" class="btn btn-default" role="button" title="Editar">
+                  <a id="_editar" data-toggle="modal" ng-click="pegaDadosEdicao(colaborador)" data-target="#myModal" class="btn btn-primary" role="button" title="Editar">
                   <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                   </a>
-                  <a id="_remover" ng-click="excluir(colaborador)" class="btn btn-default" role="button" title="Remover">
+                  <a id="_remover" ng-click="excluir(colaborador)" class="btn btn-danger" role="button" title="Remover">
                   <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                   </a>
                </td>
@@ -89,3 +90,4 @@
       <pre>Page: {{currentPage}} / {{numPages}}</pre>
    </div>
 </div>
+   

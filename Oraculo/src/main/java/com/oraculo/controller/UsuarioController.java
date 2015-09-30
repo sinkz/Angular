@@ -40,5 +40,20 @@ public class UsuarioController {
 		}
 
 	}
+	
+	@Post
+	@Path(value = "/")
+	@Transactional
+	@Consumes(value = "application/json", options = WithoutRoot.class)
+	public void salvarColaborador(Usuario usuario) {
+		try {
+			usuarioDAO.salvar(usuario);
+			result.use(Results.status()).ok();
+		} catch (RuntimeException ex) {
+			result.use(Results.status()).notAcceptable();
+			ex.printStackTrace();
+		}
+
+	}
 
 }

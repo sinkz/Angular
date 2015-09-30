@@ -1,4 +1,4 @@
-angular.module("oraculo").controller("colaboradorController", function($scope, $routeParams, $location, colaboradorAPI, Upload, $timeout) {
+angular.module("oraculo").controller("colaboradorController", function($scope,userAuthAPI, $routeParams, $location, colaboradorAPI, Upload, $timeout, $rootScope) {
 
     $scope.tamanhoMaximo = 5;
     $scope.currentPage = 1;
@@ -7,10 +7,15 @@ angular.module("oraculo").controller("colaboradorController", function($scope, $
     var editar = false;
     $scope.message = ""
 
+
+
+
     /**Adiciona um colaborador ou Edita*/
     $scope.adicionarColaborador = function(colaborador) {
         if (!editar) {
             colaborador.arquivo = $scope.f.name;
+            colaborador.usuario = $scope.user.usuario;
+            console.log("User go: "+colaborador.usuario)
             console.log('colaborador: ' + colaborador.arquivo)
             colaboradorAPI.saveColaborador(colaborador).success(function(data) {
                     salvarImagem($scope.f);
@@ -116,7 +121,7 @@ angular.module("oraculo").controller("colaboradorController", function($scope, $
 
     /**Carregar inicial que verifica o total de items para que possa renderizar a paginação corretamente*/
     var carregar = function(criterio) {
-
+        
         colaboradorAPI.getColaboradoresPesquisa().success(function(data) {
             var listaColaboradores = data;
             $scope.totalItems = listaColaboradores.length;
@@ -184,7 +189,6 @@ angular.module("oraculo").controller("colaboradorController", function($scope, $
             });
         }
     }
-
 
     carregar();
     carregarInicial(1);
