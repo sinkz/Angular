@@ -1,5 +1,5 @@
 # Angular
-Sistema AngularJs + Vraptor v0.1.1
+Sistema AngularJs + Vraptor v0.1.4
 
 Sistema Desnvolvindo para fins educativos utilizando AngularJs + Vraptor.
 
