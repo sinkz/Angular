@@ -74,7 +74,7 @@ public class ColaboradorController {
 		System.out.println("colaborador: " + arquivo);
 		try {
 			colaboradorDAO.excluir(codigo);
-			String nome = "C:\\Desenvolvimento\\Angular\\Oraculo-view\\upload\\" + arquivo;
+			String nome = DIRETORIO_UPLOAD + arquivo;
 			File f = new File(nome);
 			f.delete();
 		} catch (Exception ex) {

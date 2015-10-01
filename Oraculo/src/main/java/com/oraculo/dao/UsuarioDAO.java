@@ -1,5 +1,6 @@
 package com.oraculo.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -31,29 +32,100 @@ public class UsuarioDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Usuario> buscar() {
+	public List<Usuario> listarUsuarios(Integer paginaInicio, Integer count) {
+		List<Usuario> lista = new ArrayList<>();
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
-		Transaction transacao = sessao.beginTransaction();
-		List<Usuario> list = null;
+		Transaction transacao = null;
+		System.out.println("PaginaInicio: " + paginaInicio);
 		try {
+			transacao = sessao.beginTransaction();
 			Query consulta = sessao.getNamedQuery("Usuario.listar");
-			list = consulta.list();
+			consulta.setFirstResult((paginaInicio - 1) * 3);
+			consulta.setMaxResults(count);
+			lista = consulta.list();
 			transacao.commit();
 		} catch (RuntimeException ex) {
+			ex.printStackTrace();
 			throw ex;
 		} finally {
 			sessao.close();
 		}
-		return list;
+		return lista;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Usuario> listarUsuariosConsulta() {
+		List<Usuario> lista = new ArrayList<>();
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		Transaction transacao = null;
+		try {
+			transacao = sessao.beginTransaction();
+			Query consulta = sessao.getNamedQuery("Usuario.listar");
+			lista = consulta.list();
+			transacao.commit();
+		} catch (RuntimeException ex) {
+			ex.printStackTrace();
+			throw ex;
+		} finally {
+			sessao.close();
+		}
+		return lista;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Usuario> listarUsuariosFiltro(String nome, Integer paginaInicio, Integer count) {
+		List<Usuario> lista = new ArrayList<>();
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		Transaction transacao = null;
+		try {
+			transacao = sessao.beginTransaction();
+			System.out.println("Pagina filtro: " + paginaInicio);
+			Query consulta = sessao.getNamedQuery("Usuario.listarComFiltro");
+			consulta.setParameter("nome", "%" + nome + "%");
+			consulta.setParameter("login", "%" + nome + "%");
+			consulta.setFirstResult((paginaInicio - 1) * 3);
+			consulta.setMaxResults(count);
+			lista = consulta.list();
+			System.out.println("Resultado: " + lista);
+			transacao.commit();
+		} catch (RuntimeException ex) {
+			ex.printStackTrace();
+			throw ex;
+		} finally {
+			sessao.close();
+		}
+		return lista;
+	}
+
+	// Verifica quantos usuarioes estão na pesquisa
+	@SuppressWarnings("unchecked")
+	public List<Usuario> listarUsuariosFiltro(String nome) {
+		List<Usuario> lista = new ArrayList<>();
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		Transaction transacao = null;
+		try {
+			transacao = sessao.beginTransaction();
+			Query consulta = sessao.getNamedQuery("Usuario.listarComFiltro");
+			consulta.setParameter("nome", "%" + nome + "%");
+			consulta.setParameter("login", "%" + nome + "%");
+			lista = consulta.list();
+			transacao.commit();
+		} catch (RuntimeException ex) {
+			ex.printStackTrace();
+			throw ex;
+		} finally {
+			sessao.close();
+		}
+		return lista;
 	}
 	
-	public Usuario buscarPorCodigo(String codigo) {
+	public Usuario buscarUsuario(Integer codigo) {
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 
 		Usuario usuario = null;
 		try {
 			Query consulta = sessao.getNamedQuery("Usuario.buscarCodigo");
-			consulta.setString("codigo", codigo);
+			consulta.setInteger("codigo", codigo);
 
 			usuario = (Usuario) consulta.uniqueResult();
 		} catch (RuntimeException ex) {
@@ -80,6 +152,57 @@ public class UsuarioDAO {
 			sessao.close();
 		}
 		return usuario;
+	}
+	
+	
+	
+	public void excluir(Integer codigo) {
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		Usuario usuario = new Usuario();
+		usuario.setCodigo(codigo);
+		Transaction transacao = null;
+		try {
+			transacao = sessao.beginTransaction();
+			sessao.delete(usuario);
+			transacao.commit();
+		} catch (RuntimeException ex) {
+			ex.printStackTrace();
+			if (transacao != null) {
+				transacao.rollback();
+			}
+			throw ex;
+		} finally {
+			sessao.close();
+		}
+	}
+
+	public void editar(Usuario usuario) {
+
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		System.out.println("Usuario: " + usuario);
+		Transaction transacao = null;
+		try {
+			transacao = sessao.beginTransaction();
+			Usuario usuarioEditar = buscarUsuario(usuario.getCodigo());
+			System.out.println("TESTE: "+usuarioEditar);
+			usuarioEditar.setNome(usuario.getNome());
+			usuarioEditar.setLogin(usuario.getLogin());
+			usuarioEditar.setSenha(usuario.getSenha());
+			usuarioEditar.setPermissao(usuario.getPermissao());
+
+			sessao.update(usuarioEditar);
+			transacao.commit();
+
+		} catch (RuntimeException ex) {
+			ex.printStackTrace();
+			if (transacao != null) {
+				transacao.rollback();
+			}
+			throw ex;
+		} finally {
+			sessao.close();
+		}
+
 	}
 
 }

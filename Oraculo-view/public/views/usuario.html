@@ -1,36 +1,95 @@
+<div ng-include="'public/views/navBar.html'"></div>
+<ul class="nav nav-tabs" ng-init="tab=1">
+   <li ng-class="{'active' : tab==1}"><a ng-click="tab=1; resetar()" >Novo Usuário</a></li>
+   <li ng-class="{'active' : tab==2}"><a ng-click="tab=2" >Listar Usuários</a></li>
+</ul>
 
-<div ng-class="classAlert" ng-show="submitted || showAlert" >{{message}}
-    <button class="close" data-dismiss="alert">x</button>
-  </div>
-<h1 class="titulo">Novo Usuário</h1>
-<div class="alinhar">
-<form class="form-group" role="form" name="colaboradorForm" enctype="multipart/form-data">
+<div class="tabs-container">
+   <div class="tab-content" ng-show="tab == 1">
+      <div ng-class="classAlert" ng-show="submitted || showAlert" >{{message}}
+         <button class="close" data-dismiss="alert">x</button>
+      </div>
+      <h1 class="titulo">Novo Usuário</h1>
+      <form class="form-group" role="form" name="usuarioForm" enctype="multipart/form-data">
+         <div class="form-group">
+            <input class="form-control" type="text" name="nome" placeholder="Nome" ng-required="true" ng-model="usuario.nome" />
+         </div>
+         <div class="form-group">
+            <input class="form-control" type="text" name="login" placeholder="Login"  ng-required="true" ng-model="usuario.login" />
+         </div>
+         <div class="form-group">
+            <input class="form-control" type="password" name="senha" placeholder="Senha"  ng-required="true" ng-model="usuario.senha" />
+         </div>
+         <div class="form-group" ng-class="cssClass">
+            <input class="form-control" type="password" name="confirmSenha" placeholder="Confirmar Senha" ng-required="true" ng-model="confirmarSenha" ng-blur="verificaSenha(usuario, $event, showAlert);"/>
+         </div>
+         <div class="form-group">
+            <input class="form-control" type="text" name="permissao" placeholder="Permissão (1-Administrador | 2-Usuário Normal)" ng-required="true" ng-model="usuario.permissao" />
 
-   <div class="form-group">
-      <input class="form-control" type="text" name="nome" placeholder="Nome" ng-required="true" ng-model="usuario.nome" />
+         </div>
+
+          <div class="form-group">
+         <h4>Envie uma Foto:</h4>
+                  <button type="file" class="btn btn-primary botao" ngf-select="uploadFiles($file)"
+                     accept="image/*" ngf-max-height="2000" ngf-max-size="2MB">
+                  Selecionar</button>
+                  <div style="font:smaller">
+                     {{f.name}} {{f.$error}} {{f.$errorParam}}
+                     <span class="progress" ng-show="f.progress >= 0">
+                        <div style="width:{{f.progress}}%"  
+                           ng-bind="f.progress + '%'"></div>
+                     </span>
+                  </div>
+
+                  {{errorMsg}}
+          </div>
+
+
+         <div class="form-group">
+            <button class="btn btn-primary btn-block" ng-click="salvar(usuario)" ng-disabled="usuarioForm.$invalid || !senhasIguais">
+            <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
+            Salvar
+            </button>
+         </div>
+      </form>
    </div>
 
-   <div class="form-group">
-      <input class="form-control" type="text" name="login" placeholder="Login"  ng-required="true" ng-model="usuario.login" />
+   <div class="tab-content" ng-show="tab == 2">
+      <h1 class="titulo">Usuários</h1>
+      </br>
+      <input class="form-control" type="text" ng-model="criterioDeBusca" placeholder="Quem você está buscando?" 
+         ng-keyup="filtrar(criterioDeBusca, currentPage)"/>
+      <div class="table-responsive">
+         <table class="table table-hover" ng-show="usuarios.length > 0">
+            <thead>
+               <tr>
+                  <th>#</th>
+                  <th><a href="" ng-click="ordenarPor('nome')">Nome</a></th>
+                  <th><a href="" ng-click="ordenarPor('login')">Login</a></th>
+                  <th style="text-align: center;">Permissão</th>
+                  <th style="text-align: center;">Ação</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr ng-repeat="usuario in usuarios | orderBy:criterioOrdenacao:direcaoOrdenacao" 
+                  id="_usuario">
+                  <th scope="row">{{usuario.codigo}}</th>
+                  <td><a class="nounderline" href="#/detalhesUsuario/{{usuario.codigo}}">{{usuario.nome}}</a></td>
+                  <td>{{usuario.login}}</td>
+                  <td class="alinharCentro">{{usuario.permissao}}</td>
+                  <td style="text-align: center;">
+                     <a id="_editar" data-toggle="modal" ng-click="pegaDadosEdicao(usuario)" data-target="#myModal" class="btn btn-primary" role="button" title="Editar">
+                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                     </a>
+                     <a id="_remover" ng-click="excluir(usuario)" class="btn btn-danger" role="button" title="Remover">
+                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                     </a>
+                  </td>
+               </tr>
+            </tbody>
+         </table>
+         <pagination total-items="totalItems" ng-model="currentPage" max-size="tamanhoMaximo" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" ng-click="loading(currentPage, criterioDeBusca)" items-per-page="3"></pagination>
+         <pre>Page: {{currentPage}} / {{numPages}}</pre>
+      </div>
    </div>
-
-   <div class="form-group">
-      <input class="form-control" type="password" name="senha" placeholder="Senha"  ng-required="true" ng-model="usuario.senha" />
-   </div>
-
-   <div class="form-group" ng-class="cssClass">
-      <input class="form-control" type="password" name="confirmSenha" placeholder="Confirmar Senha" ng-required="true" ng-model="confirmarSenha" ng-blur="verificaSenha(usuario, $event, showAlert)"/>
-   </div>
-
-   <div class="form-group">
-      <input class="form-control" type="text" name="permissao" placeholder="Permissão" ng-required="true" ng-model="usuario.permissao" />
-   </div>
-
-   <div class="form-group">
-      <button class="btn btn-primary btn-block" ng-click="salvar(usuario)" ng-disabled="colaboradorForm.$invalid || !senhasIguais">
-      <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
-      Salvar
-      </button>
-   </div>
-</form>
 </div>

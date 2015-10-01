@@ -1,0 +1,26 @@
+<div ng-include="'public/views/navBar.html'"></div>     
+<div class="jumbotron">
+<div class="row">
+	<div class="col-md-8">
+		<p>{{usuario.nome}}</p>
+		</br>
+		</br>
+		<b class="colorB">Login:</b> {{usuario.login}}
+		</br>
+		</br>
+		<b class="colorB">Senha:</b> {{usuario.senha}}
+		</br>
+		</br>
+		<b class="colorB">Permissão:</b> {{usuario.permissao}}
+		</br>
+		</br>
+		</br>
+		<a href="#/usuario">Voltar</a>
+	</div>
+
+	<div class="col-md-4">
+		<img src="upload/users/{{usuario.foto}}"  class="img-responsive img " alt="Responsive image" >
+ 	</div>
+</div>
+</div>
+</div>

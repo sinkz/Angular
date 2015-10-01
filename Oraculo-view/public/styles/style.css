@@ -120,3 +120,17 @@ input[type="password"] {
   text-align: center;
   color: #18BC9C;
 }
+
+.alinharCentro{
+  text-align: center;
+}
+
+.img-arredondada {
+  border-radius: 100%;
+    overflow: hidden;
+    height: 45px;
+    width:45px;
+    background: black;
+    margin-top:8px;
+    float:right;
+}

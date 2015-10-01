@@ -5,8 +5,8 @@ angular.module("oraculo").controller("colaboradorController", function($scope,us
     $scope.totalItems = 60; //Dinamico
     $scope.colaborador = "";
     var editar = false;
-    $scope.message = ""
-
+    $scope.message = "";
+    $scope.criterioDeBusca = "";
 
 
 
@@ -39,8 +39,11 @@ angular.module("oraculo").controller("colaboradorController", function($scope,us
                 });
 
         } else if (editar) {
+            colaborador.arquivo = $scope.f.name;
+            colaborador.usuario = $scope.user.usuario;
             colaboradorAPI.editaColaborador(colaborador.codigo, colaborador).success(function(data) {
                     console.log("Editando..");
+                    salvarImagem($scope.f);
                     $scope.submitted = true;
                     $scope.message = "Colaborador Editado com Sucesso!!";
                     $scope.classAlert = "alert alert-success";
@@ -132,16 +135,18 @@ angular.module("oraculo").controller("colaboradorController", function($scope,us
     /**Filtra os dados por nome*/
     $scope.filtrar = function(criterioDeBusca, currentPage) {
         //Se o input for diferente de vazio ele carrega os dados
-        if (criterioDeBusca != "" || criterioDeBusca != undefined) {
+        console.log("Criterio: "+criterioDeBusca)
+        if (criterioDeBusca != "" && criterioDeBusca != undefined) {
 
             console.log("criterio" + criterioDeBusca);
+            console.log("entrou")
             colaboradorAPI.getColaboradoresFiltro(criterioDeBusca, currentPage).success(function(data) {
                 $scope.colaboradores = data;
                 carregarQuantidadeFiltro(criterioDeBusca);
 
             });
             //Caso o input passe a ficar vazio ele carreta todos normalmente sem filtro
-        } else {
+        } else if(criterioDeBusca == "" || criterioDeBusca == undefined){
             carregarInicial(1);
             carregar();
         }
@@ -189,6 +194,27 @@ angular.module("oraculo").controller("colaboradorController", function($scope,us
             });
         }
     }
+    var init = function () {
+        var temp = sessionStorage.getItem('userLogado');
+        var viewName = $.parseJSON(temp); 
+        
+        if(viewName != null){   
+            $scope.usuarioLogado = viewName.usuario.nome;
+            $scope.user = viewName;
+        }else{
+            $scope.usuarioLogado = "";
+        }
+    };
+
+    $scope.sair = function(){
+        $scope.usuarioLogado = "";
+        sessionStorage.removeItem('userLogado');
+        sessionStorage.setItem('logado', false);
+        console.log("Sair")
+
+    }
+
+    init();
 
     carregar();
     carregarInicial(1);

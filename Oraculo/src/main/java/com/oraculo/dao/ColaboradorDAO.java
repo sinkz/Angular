@@ -158,7 +158,7 @@ public class ColaboradorDAO {
 	}
 
 	public void editar(Colaborador colaborador) {
-
+		System.out.println("colaborador Usuario: "+colaborador.getUsuario().getLogin());
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		System.out.println("Colaborador: " + colaborador);
 		Transaction transacao = null;
@@ -172,6 +172,8 @@ public class ColaboradorDAO {
 			colaboradorEditar.setSenhaSype(colaborador.getSenhaSype());
 			colaboradorEditar.setUserEmail(colaborador.getUserEmail());
 			colaboradorEditar.setUserSkype(colaborador.getUserSkype());
+			colaboradorEditar.setArquivo(colaborador.getArquivo());
+			colaboradorEditar.setUsuario(colaborador.getUsuario());
 
 			sessao.update(colaboradorEditar);
 			transacao.commit();

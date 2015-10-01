@@ -17,6 +17,16 @@ angular.module("oraculo").config(function($routeProvider){
 		}
 	});
 
+	$routeProvider.when("/detalhesUsuario/:codigo", {
+		templateUrl: "public/views/detalhesUsuarios.html",
+		controller: "detalhesUsuarioCtrl",
+		resolve: {
+			usuario: function (usuarioAPI, $route) {
+				return usuarioAPI.getUsuarioCodigo($route.current.params.codigo);
+			}
+		}
+	});
+
 	$routeProvider.when("/login", {
 		templateUrl: "public/views/login.html",
 		controller: "loginCtrl"

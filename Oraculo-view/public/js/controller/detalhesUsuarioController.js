@@ -1,6 +1,6 @@
-angular.module("oraculo").controller("detalhesContatoCtrl", function($scope, $routeParams, colaborador){
+angular.module("oraculo").controller("detalhesUsuarioCtrl", function($scope, $routeParams, usuario){
     console.log($routeParams.codigo)
-    $scope.colaborador = colaborador.data;
+    $scope.usuario = usuario.data;
 
     var init = function () {
         var temp = sessionStorage.getItem('userLogado');

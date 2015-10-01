@@ -1,3 +1,4 @@
+<div ng-include="'public/views/navBar.html'"></div>
 <div class="panel-heading">
   <div ng-class="classAlert" ng-show="submitted || showAlert" >{{message}}
     <button class="close" data-dismiss="alert">x</button>
@@ -66,7 +67,7 @@
                <th>#</th>
                <th><a href="" ng-click="ordenarPor('nome')">Nome</a></th>
                <th><a href="" ng-click="ordenarPor('setor')">Setor</a></th>
-               <th>Ação</th>
+               <th style="text-align: center;">Ação</th>
             </tr>
          </thead>
          <tbody>
@@ -75,7 +76,7 @@
                <th scope="row">{{colaborador.codigo}}</th>
                <td><a class="nounderline" href="#/detalhesColaborador/{{colaborador.codigo}}">{{colaborador.nome}}</a></td>
                <td>{{colaborador.setor}}</td>
-               <td>
+               <td style="text-align: center;">
                   <a id="_editar" data-toggle="modal" ng-click="pegaDadosEdicao(colaborador)" data-target="#myModal" class="btn btn-primary" role="button" title="Editar">
                   <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                   </a>

@@ -41,11 +41,6 @@
 
 		<mapping class="com.oraculo.model.Colaborador" />
 		<mapping class="com.oraculo.model.Usuario" />
-		
-
-		
-
-
 
 	</session-factory>
 

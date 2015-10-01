@@ -23,6 +23,11 @@
 
          </ul>
          <ul class="nav navbar-nav navbar-right">
+          <li>
+            
+            <img src="upload/users/{{user.usuario.foto}}"  class="img-responsive img-arredondada" alt="Responsive image" >
+     
+          </li>
             <li><p ng-init="init()" class="navbar-text usuarioLogado">{{user.usuario.nome}}</p></li>
             <li> 
                <a ng-click="sair()" class="logoff" href="#/">Sair</a>       

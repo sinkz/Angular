@@ -39,9 +39,7 @@ angular.module("oraculo").controller("loginCtrl", function($scope, $routeParams,
         var temp = sessionStorage.getItem('userLogado');
         var viewName = $.parseJSON(temp); 
         
-    
-        if(viewName != null){
-            
+        if(viewName != null){   
             $scope.usuarioLogado = viewName.usuario.nome;
             $scope.user = viewName;
         }else{

@@ -12,7 +12,8 @@ import javax.persistence.Table;
 @Table
 @NamedQueries({ @NamedQuery(name = "Usuario.listar", query = "SELECT usuario FROM Usuario usuario"),
 		@NamedQuery(name = "Usuario.buscarCodigo", query = "SELECT usuario FROM Usuario usuario WHERE usuario.codigo = :codigo"),
-		@NamedQuery(name = "Usuario.Autenticar", query = "SELECT usuario FROM Usuario usuario WHERE usuario.login= :login AND usuario.senha = :senha") })
+		@NamedQuery(name = "Usuario.Autenticar", query = "SELECT usuario FROM Usuario usuario WHERE usuario.login= :login AND usuario.senha = :senha"),
+		@NamedQuery(name = "Usuario.listarComFiltro", query = "SELECT usuario FROM Usuario usuario WHERE usuario.nome like :nome OR usuario.login like :login")})
 public class Usuario {
 
 	@Id
@@ -26,6 +27,9 @@ public class Usuario {
 	private String senha;
 	@Column(nullable = false, length = 30)
 	private String permissao;
+	
+	@Column(nullable = true, length = 60)
+	private String foto;
 
 	public Integer getCodigo() {
 		return codigo;
@@ -66,11 +70,23 @@ public class Usuario {
 	public void setPermissao(String permissao) {
 		this.permissao = permissao;
 	}
+	
+	
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
 
 	@Override
 	public String toString() {
 		return "Usuario [codigo=" + codigo + ", nome=" + nome + ", login=" + login + ", senha=" + senha + ", permissao="
-				+ permissao + "]";
+				+ permissao + ", foto=" + foto + "]";
 	}
+
+	
 
 }
