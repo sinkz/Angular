@@ -189,6 +189,7 @@ public class UsuarioDAO {
 			usuarioEditar.setLogin(usuario.getLogin());
 			usuarioEditar.setSenha(usuario.getSenha());
 			usuarioEditar.setPermissao(usuario.getPermissao());
+			usuarioEditar.setFoto(usuario.getFoto());
 
 			sessao.update(usuarioEditar);
 			transacao.commit();
