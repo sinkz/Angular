@@ -5,6 +5,7 @@ angular.module("oraculo").controller("usuarioCtrl", function($scope, $routeParam
     $scope.currentPage = 1;
     $scope.totalItems = 60; //Dinamico
     var editar = false;
+    var user = "";
 
     $scope.salvar = function(usuario) {
         if (!editar) {
@@ -74,11 +75,14 @@ angular.module("oraculo").controller("usuarioCtrl", function($scope, $routeParam
         
 
     }
-    
+     //Pega um usuario e atribui a uma váriavel para ser usada na exclusão
+     $scope.pegaUsuario = function(usuario) {
+        user = usuario;
+     }
 
     /**Exclui um usuario*/
-    $scope.excluir = function(usuario) {
-            usuarioAPI.deleteUsuario(usuario.codigo, usuario.foto).success(function(data) {
+    $scope.excluir = function() {
+            usuarioAPI.deleteUsuario(user.codigo, user.foto).success(function(data) {
                     console.log("Excluindo..");
                     $scope.submitted = true;
                     $scope.message = "Usuário Excluido com Sucesso!!";
@@ -104,6 +108,8 @@ angular.module("oraculo").controller("usuarioCtrl", function($scope, $routeParam
         $scope.confirmarSenha = usuario.senha;
         $scope.tab = 1;
     }
+
+    
 
     /**Carrega um novo usuario a cada troca de página*/
     $scope.loading = function(currentPage, criterioDeBusca) {

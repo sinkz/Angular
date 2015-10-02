@@ -1,9 +1,14 @@
+<div id="wrapper">
 <div ng-include="'public/views/navBar.html'"></div>
+<div id="page-content-wrapper">
+
 <div class="panel-heading">
+
   <div ng-class="classAlert" ng-show="submitted || showAlert" >{{message}}
     <button class="close" data-dismiss="alert">x</button>
   </div>
    <button type="button" ng-click="limparColaborador()" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Novo Registro </button>
+
    <!-- Modal -->
    <div id="myModal" class="modal fade" role="dialog" >
       <div class="modal-dialog">
@@ -80,7 +85,7 @@
                   <a id="_editar" data-toggle="modal" ng-click="pegaDadosEdicao(colaborador)" data-target="#myModal" class="btn btn-primary" role="button" title="Editar">
                   <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                   </a>
-                  <a id="_remover" ng-click="excluir(colaborador)" class="btn btn-danger" role="button" title="Remover">
+                  <a id="_remover" ng-click="pegaColaborador(colaborador)" class="btn btn-danger" role="button" title="Remover" data-toggle="modal" data-target="#modal-exclusao">
                   <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                   </a>
                </td>
@@ -90,5 +95,32 @@
       <pagination total-items="totalItems" ng-model="currentPage" max-size="tamanhoMaximo" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" ng-click="loading(currentPage, criterioDeBusca)" items-per-page="5"></pagination>
       <pre>Page: {{currentPage}} / {{numPages}}</pre>
    </div>
+
+    <!-- Modal Exclusão -->
+   <div id="modal-exclusao" class="modal fade" role="dialog" tabindex="-1"  aria-labelledby="myModalLabel" aria-hidden="true" >
+    <div class="modal-dialog">
+            <div class="modal-content">
+            
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Confirmar Exclusão </h4>
+                </div>
+            
+                <div class="modal-body">
+                    <p>Voce está prestes a excluir um Colaborador, esse processo é irreversível.</p>
+                    <p>Gostaria de Proceder?</p>
+                    <p class="debug-url"></p>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-danger btn-ok" ng-click="excluir(colaborador)" data-dismiss="modal">Excluir</a>
+                </div>
+            </div>
+        </div>
+   </div>
 </div>
+  </div>
+</div>
+
    

@@ -1,8 +1,14 @@
+<div id="wrapper">
 <div ng-include="'public/views/navBar.html'"></div>
+<div id="page-content-wrapper">
+<div class="container-fluid">
 <ul class="nav nav-tabs" ng-init="tab=1">
    <li ng-class="{'active' : tab==1}"><a ng-click="tab=1; resetar()" >Novo Usuário</a></li>
    <li ng-class="{'active' : tab==2}"><a ng-click="tab=2" >Listar Usuários</a></li>
 </ul>
+  <div ng-class="classAlert" ng-show="submitted || showAlert" >{{message}}
+    <button class="close" data-dismiss="alert">x</button>
+  </div>
 
 <div class="tabs-container">
    <div class="tab-content" ng-show="tab == 1">
@@ -78,10 +84,11 @@
                   <td>{{usuario.login}}</td>
                   <td class="alinharCentro">{{usuario.permissao}}</td>
                   <td style="text-align: center;">
-                     <a id="_editar" data-toggle="modal" ng-click="pegaDadosEdicao(usuario)" data-target="#myModal" class="btn btn-primary" role="button" title="Editar">
+                     <a id="_editar" ng-click="pegaDadosEdicao(usuario)" class="btn btn-primary" role="button" title="Editar">
                      <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                      </a>
-                     <a id="_remover" ng-click="excluir(usuario)" class="btn btn-danger" role="button" title="Remover">
+                     <a id="_remover" class="btn btn-danger" role="button" title="Remover" data-toggle="modal" 
+                     data-target="#myModal" ng-click="pegaUsuario(usuario)">
                      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                      </a>
                   </td>
@@ -92,4 +99,31 @@
          <pre>Page: {{currentPage}} / {{numPages}}</pre>
       </div>
    </div>
+
+     <!-- Modal Exclusão -->
+   <div id="myModal" class="modal fade" role="dialog" tabindex="-1"  aria-labelledby="myModalLabel" aria-hidden="true" >
+    <div class="modal-dialog">
+            <div class="modal-content">
+            
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Confirmar Exclusão </h4>
+                </div>
+            
+                <div class="modal-body">
+                    <p>Voce está prestes a excluir um Usuário, esse processo é irreversível.</p>
+                    <p>Gostaria de Proceder?</p>
+                    <p class="debug-url"></p>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-danger btn-ok" ng-click="excluir(usuario)" data-dismiss="modal">Excluir</a>
+                </div>
+            </div>
+        </div>
+   </div>
+</div>
+  </div>
+</div>
 </div>

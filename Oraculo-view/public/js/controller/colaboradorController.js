@@ -7,7 +7,7 @@ angular.module("oraculo").controller("colaboradorController", function($scope,us
     var editar = false;
     $scope.message = "";
     $scope.criterioDeBusca = "";
-
+    var colaboradorExcluir = "";
 
 
     /**Adiciona um colaborador ou Edita*/
@@ -61,9 +61,14 @@ angular.module("oraculo").controller("colaboradorController", function($scope,us
 
     }
 
+     //Pega um colaborador e atribui a uma váriavel para ser usada na exclusão
+     $scope.pegaColaborador = function(colaborador) {
+        colaboradorExcluir = colaborador;
+     }
+
     /**Exclui um colaborador*/
     $scope.excluir = function(colaborador) {
-            colaboradorAPI.deleteColaborador(colaborador.codigo, colaborador.arquivo).success(function(data) {
+            colaboradorAPI.deleteColaborador(colaboradorExcluir.codigo, colaboradorExcluir.arquivo).success(function(data) {
                     console.log("Excluindo..");
                     $scope.submitted = true;
                     $scope.message = "Colaborador Excluído com Sucesso!!";

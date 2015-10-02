@@ -1,5 +1,5 @@
-<nav class="navbar navbar-default navbar-fixed-top">
-   <div class="container">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+
       <div class="navbar-header">
          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
             aria-controls="navbar">
@@ -7,32 +7,50 @@
          <span class="icon-bar"></span>
          <span class="icon-bar"></span>
          </button>
-         <a class="navbar-brand" href="#/home">Oraculo</a>
+          <a class="navbar-brand alinhaTitulo" href="#/home">ORÁCULO</a>
       </div>
       <div id="navbar" class="navbar-collapse collapse">
-         <ul class="nav navbar-nav">
-            <li class="active">
-               <a href="#/home">Home</a>
-            </li> 
-         <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ng-if="user.usuario.permissao ==1">Configurações <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#/usuario">Novo Usuário</a></li>
-          </ul>
-        </li>
-
-         </ul>
          <ul class="nav navbar-nav navbar-right">
-          <li>
-            
-            <img src="upload/users/{{user.usuario.foto}}"  class="img-responsive img-arredondada" alt="Responsive image" >
-     
-          </li>
-            <li><p ng-init="init()" class="navbar-text usuarioLogado">{{user.usuario.nome}}</p></li>
+            <li>
+               <p ng-init="init()" class="navbar-text usuarioLogado"><i class="fa fa-fw fa-user"></i>{{user.usuario.nome}}</p>
+            </li>
             <li> 
-               <a ng-click="sair()" class="logoff" href="#/">Sair</a>       
+               <a ng-click="sair()" class="logoff" href="#/"><i class="fa fa-fw fa-power-off"></i> Sair</a>       
             </li>
          </ul>
       </div>
+
+   <div id="wrapper">
+    <a id="menu-toggle" href="#menu" ng-click"menux=true">
+            MENU
+        </a>
+
+   <!-- Sidebar -->
+   <div id="sidebar-wrapper">
+      <ul class="sidebar-nav">
+         <li class="sidebar-brand">
+            <img src="upload/users/{{user.usuario.foto}}" class="img-responsive img-arredondadaSide" alt="Responsive image"/>      
+         </li>
+         </br>
+         </br>
+         </br>
+         <li class="active">
+            <a href="#/home"><i class="fa fa-home"></i> Home</a>
+         </li>
+         <li>
+            <a class="dropdown-toggle" data-toggle="collapse" data-target="#configuracoes" role="button" 
+               aria-haspopup="true" aria-expanded="false" ng-if="user.usuario.permissao ==1"><i class="fa fa-cog"></i> Configurações <span class="caret">
+            </span></a>
+            <ul id="configuracoes" class="collapse">
+               <li>
+                  <a href="#/usuario">Usuários</a>
+               </li>
+            </ul>
+         </li>
+      </ul>
+
    </div>
+   <!-- /#sidebar-wrapper -->
 </nav>
+  
+</script>
