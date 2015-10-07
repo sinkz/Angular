@@ -11,7 +11,6 @@ body {
 	margin-top: 5px;
 }
 
-.ajustaContainer
 
 .alinhar{
 	margin-top: 10px;
@@ -30,7 +29,10 @@ a.nounderline:link {
 
 }
 .alinhaTitulo{
-   margin-left:24px;
+   margin-left:40px;
+}
+.alinhaBotaoMenu{
+  margin-top: -15px;
 }
 .img{
 	height: 55%;
@@ -69,6 +71,8 @@ form .progress {
 .wrapper {    
     margin-top: 80px;
     margin-bottom: 20px;
+ 
+  
 }
 
 .form-signin {
@@ -125,6 +129,7 @@ input[type="password"] {
   margin-left:13px;
   margin-right: 10px;
 }
+
 .titulo{
   text-align: center;
   color: #18BC9C;
@@ -150,8 +155,8 @@ input[type="password"] {
     height: 100px;
     width:100px;
     background: black;
-    margin-top:5px;
-    margin-left: 55px;
+    margin-top:15px;
+    margin-left: 60px;
 
 }
 
@@ -170,7 +175,7 @@ input[type="password"] {
 #sidebar-wrapper {
     z-index: 1000;
     position: fixed;
-    left: 230px;
+    left: 250px;
     width: 0;
     height: 100%;
     margin-left: -250px;
@@ -182,24 +187,19 @@ input[type="password"] {
     transition: all 0.5s ease;
 }
 
-.close{
-    transform: translateX(-100%);
-}
-
 #wrapper.toggled #sidebar-wrapper {
-    width: 200px;
+    width: 250px;
 }
 
 #page-content-wrapper {
-    width: 105%;
+    width: 100%;
     position: absolute;
-    float:right;
     padding: 15px;
 }
 
 #wrapper.toggled #page-content-wrapper {
     position: absolute;
-   
+    margin-right: -250px;
 }
 
 /* Sidebar Styles */
@@ -250,20 +250,17 @@ input[type="password"] {
     background: none;
 }
 
-
-
 @media(min-width:768px) {
     #wrapper {
-        padding-left: 290px;
+        padding-left: 250px;
     }
 
-    #wrapper.toggled {
+    #wrapper.toggled  {
         padding-left: 0;
     }
 
     #sidebar-wrapper {
-        width: 220px;
-
+        width: 250px;
     }
 
     #wrapper.toggled #sidebar-wrapper {
@@ -279,9 +276,10 @@ input[type="password"] {
         position: relative;
         margin-right: 0;
     }
-
 }
 
+
+/* NOSSO CSS ADICIONAL */
 #menu-toggle {
   display: none; 
 }
@@ -292,4 +290,10 @@ input[type="password"] {
   }
 }
 
+@media(max-width:1600px) {     
+
+  #menu-toggle {
+    display: block; 
+  }
+}
 

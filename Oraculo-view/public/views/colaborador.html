@@ -1,126 +1,113 @@
 <div id="wrapper">
-<div ng-include="'public/views/navBar.html'"></div>
-<div id="page-content-wrapper">
-
-<div class="panel-heading">
-
-  <div ng-class="classAlert" ng-show="submitted || showAlert" >{{message}}
-    <button class="close" data-dismiss="alert">x</button>
-  </div>
-   <button type="button" ng-click="limparColaborador()" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Novo Registro </button>
-
-   <!-- Modal -->
-   <div id="myModal" class="modal fade" role="dialog" >
-      <div class="modal-dialog">
-         <!-- Modal content-->
-         <div class="modal-content">
-            <div class="modal-header">
-               <button type="button" class="close" data-dismiss="modal">x</button>
-               <h4 class="modal-title">Novo Colaborador</h4>
-            </div>
-            <div class="alinhar">
-               <div ng-class="classAlert" ng-show="submitted || showAlert" >{{message}}</div>
-               <form class="form-horizontal" role="form" name="colaboradorForm" enctype="multipart/form-data">
-                  <input class="form-control camposModal" type="text" name="nome" placeholder="Nome" ng-model="colaborador.nome" ng-required="true" />
-                  <input class="form-control camposModal" type="text" name="setor" placeholder="Setor" ng-model="colaborador.setor" 
-                     ng-required="true"/>
-                  <input class="form-control camposModal" type="text" name="skype" placeholder="Skype" 
-                     ng-model="colaborador.userSkype" ng-required="true"/>
-                  <input class="form-control camposModal" type="text" name="senhaSkype" placeholder="Senha Skype" ng-model="colaborador.senhaSype" ng-required="true"/>
-                  <input class="form-control camposModal" type="email" name="email" placeholder="Email" ng-model="colaborador.userEmail"  ng-required="true" />
-                  <input class="form-control camposModal" type="text" name="senha Email" placeholder="Senha Email" ng-model="colaborador.senhaEmail" 
-                     ng-required="true"/>
-
-
-                  <h4>Envie uma Foto:</h4>
-                  <button type="file" class="btn btn-primary botao" ngf-select="uploadFiles($file)"
-                     accept="image/*" ngf-max-height="2000" ngf-max-size="2MB">
-                  Selecionar</button>
-                  <div style="font:smaller">
-                     {{f.name}} {{f.$error}} {{f.$errorParam}}
-                     <span class="progress" ng-show="f.progress >= 0">
-                        <div style="width:{{f.progress}}%"  
-                           ng-bind="f.progress + '%'"></div>
-                     </span>
+   <hamburger-toggle state="stateModel" id="menu-toggle" href="#menu" class="alinhaBotaoMenu"></hamburger-toggle>
+   <div ng-include="'public/views/navBar.html'"></div>
+   <div id="page-content-wrapper">
+      <div class="panel-heading">
+         <div ng-class="classAlert" ng-show="submitted || showAlert" >{{message}}
+            <button class="close" data-dismiss="alert">x</button>
+         </div>
+         <button type="button" ng-click="limparColaborador()" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Novo Registro </button>
+         <!-- Modal -->
+         <div id="myModal" class="modal fade" role="dialog" >
+            <div class="modal-dialog">
+               <!-- Modal content-->
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal">x</button>
+                     <h4 class="modal-title">Novo Colaborador</h4>
                   </div>
-
-                  {{errorMsg}}
-               </form>
+                  <div class="alinhar">
+                     <div ng-class="classAlert" ng-show="submitted || showAlert" >{{message}}</div>
+                     <form class="form-horizontal" role="form" name="colaboradorForm" enctype="multipart/form-data">
+                        <input class="form-control camposModal" type="text" name="nome" placeholder="Nome" ng-model="colaborador.nome" ng-required="true" />
+                        <input class="form-control camposModal" type="text" name="setor" placeholder="Setor" ng-model="colaborador.setor" 
+                           ng-required="true"/>
+                        <input class="form-control camposModal" type="text" name="skype" placeholder="Skype" 
+                           ng-model="colaborador.userSkype" ng-required="true"/>
+                        <input class="form-control camposModal" type="text" name="senhaSkype" placeholder="Senha Skype" ng-model="colaborador.senhaSype" ng-required="true"/>
+                        <input class="form-control camposModal" type="email" name="email" placeholder="Email" ng-model="colaborador.userEmail"  ng-required="true" />
+                        <input class="form-control camposModal" type="text" name="senha Email" placeholder="Senha Email" ng-model="colaborador.senhaEmail" 
+                           ng-required="true"/>
+                        <h4>Envie uma Foto:</h4>
+                        <button type="file" class="btn btn-primary botao" ngf-select="uploadFiles($file)"
+                           accept="image/*" ngf-max-height="2000" ngf-max-size="2MB">
+                        Selecionar</button>
+                        <div style="font:smaller">
+                           {{f.name}} {{f.$error}} {{f.$errorParam}}
+                           <span class="progress" ng-show="f.progress >= 0">
+                              <div style="width:{{f.progress}}%"  
+                                 ng-bind="f.progress + '%'"></div>
+                           </span>
+                        </div>
+                        {{errorMsg}}
+                     </form>
+                  </div>
+                  <div class="modal-footer">
+                     <button class="btn btn-success btn-block" ng-click="adicionarColaborador(colaborador)" ng-disabled="colaboradorForm.$invalid || f.$errorParam" data-dismiss="modal">
+                     <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
+                     Salvar
+                     </button>
+                  </div>
+               </div>
             </div>
-            <div class="modal-footer">
-               <button class="btn btn-success btn-block" ng-click="adicionarColaborador(colaborador)" ng-disabled="colaboradorForm.$invalid || f.$errorParam" data-dismiss="modal">
-               <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
-               Salvar
-               </button>
+         </div>
+      </div>
+      <div class="panel-heading">
+         <h3 class="panel-title">Colaboradores</h3>
+      </div>
+      <div class="panel-body">
+         <input class="form-control" type="text" ng-model="criterioDeBusca" placeholder="Quem você está buscando?" 
+            ng-keyup="filtrar(criterioDeBusca, currentPage)"/>
+         <div class="table-responsive">
+            <table class="table table-hover" ng-show="colaboradores.length > 0">
+               <thead>
+                  <tr>
+                     <th>#</th>
+                     <th><a href="" ng-click="ordenarPor('nome')">Nome</a></th>
+                     <th><a href="" ng-click="ordenarPor('setor')">Setor</a></th>
+                     <th style="text-align: center;">Ação</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr ng-repeat="colaborador in colaboradores | orderBy:criterioOrdenacao:direcaoOrdenacao" 
+                     id="_colaborador">
+                     <th scope="row">{{colaborador.codigo}}</th>
+                     <td><a class="nounderline" href="#/detalhesColaborador/{{colaborador.codigo}}">{{colaborador.nome}}</a></td>
+                     <td>{{colaborador.setor}}</td>
+                     <td style="text-align: center;">
+                        <a id="_editar" data-toggle="modal" ng-click="pegaDadosEdicao(colaborador)" data-target="#myModal" class="btn btn-primary" role="button" title="Editar">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                        </a>
+                        <a id="_remover" ng-click="pegaColaborador(colaborador)" class="btn btn-danger" role="button" title="Remover" data-toggle="modal" data-target="#modal-exclusao">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        </a>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+            <pagination total-items="totalItems" ng-model="currentPage" max-size="tamanhoMaximo" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" ng-click="loading(currentPage, criterioDeBusca)" items-per-page="5"></pagination>
+            <pre>Page: {{currentPage}} / {{numPages}}</pre>
+         </div>
+         <!-- Modal Exclusão -->
+         <div id="modal-exclusao" class="modal fade" role="dialog" tabindex="-1"  aria-labelledby="myModalLabel" aria-hidden="true" >
+            <div class="modal-dialog">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                     <h4 class="modal-title" id="myModalLabel">Confirmar Exclusão </h4>
+                  </div>
+                  <div class="modal-body">
+                     <p>Voce está prestes a excluir um Colaborador, esse processo é irreversível.</p>
+                     <p>Gostaria de Proceder?</p>
+                     <p class="debug-url"></p>
+                  </div>
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                     <a class="btn btn-danger btn-ok" ng-click="excluir(colaborador)" data-dismiss="modal">Excluir</a>
+                  </div>
+               </div>
             </div>
          </div>
       </div>
    </div>
 </div>
-
-<div class="panel-heading">
-   <h3 class="panel-title">Colaboradores</h3>
-</div>
-
-<div class="panel-body">
-   <input class="form-control" type="text" ng-model="criterioDeBusca" placeholder="Quem você está buscando?" 
-      ng-keyup="filtrar(criterioDeBusca, currentPage)"/>
-   <div class="table-responsive">
-      <table class="table table-hover" ng-show="colaboradores.length > 0">
-         <thead>
-            <tr>
-               <th>#</th>
-               <th><a href="" ng-click="ordenarPor('nome')">Nome</a></th>
-               <th><a href="" ng-click="ordenarPor('setor')">Setor</a></th>
-               <th style="text-align: center;">Ação</th>
-            </tr>
-         </thead>
-         <tbody>
-            <tr ng-repeat="colaborador in colaboradores | orderBy:criterioOrdenacao:direcaoOrdenacao" 
-               id="_colaborador">
-               <th scope="row">{{colaborador.codigo}}</th>
-               <td><a class="nounderline" href="#/detalhesColaborador/{{colaborador.codigo}}">{{colaborador.nome}}</a></td>
-               <td>{{colaborador.setor}}</td>
-               <td style="text-align: center;">
-                  <a id="_editar" data-toggle="modal" ng-click="pegaDadosEdicao(colaborador)" data-target="#myModal" class="btn btn-primary" role="button" title="Editar">
-                  <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                  </a>
-                  <a id="_remover" ng-click="pegaColaborador(colaborador)" class="btn btn-danger" role="button" title="Remover" data-toggle="modal" data-target="#modal-exclusao">
-                  <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                  </a>
-               </td>
-            </tr>
-         </tbody>
-      </table>
-      <pagination total-items="totalItems" ng-model="currentPage" max-size="tamanhoMaximo" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" ng-click="loading(currentPage, criterioDeBusca)" items-per-page="5"></pagination>
-      <pre>Page: {{currentPage}} / {{numPages}}</pre>
-   </div>
-
-    <!-- Modal Exclusão -->
-   <div id="modal-exclusao" class="modal fade" role="dialog" tabindex="-1"  aria-labelledby="myModalLabel" aria-hidden="true" >
-    <div class="modal-dialog">
-            <div class="modal-content">
-            
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Confirmar Exclusão </h4>
-                </div>
-            
-                <div class="modal-body">
-                    <p>Voce está prestes a excluir um Colaborador, esse processo é irreversível.</p>
-                    <p>Gostaria de Proceder?</p>
-                    <p class="debug-url"></p>
-                </div>
-                
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    <a class="btn btn-danger btn-ok" ng-click="excluir(colaborador)" data-dismiss="modal">Excluir</a>
-                </div>
-            </div>
-        </div>
-   </div>
-</div>
-  </div>
-</div>
-
-   

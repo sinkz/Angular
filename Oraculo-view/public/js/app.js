@@ -1,1 +1,1 @@
-angular.module("oraculo", ["ngRoute", "ngMessages", "ui.bootstrap", "ngFileUpload"]);
+angular.module("oraculo", ["ngRoute", "ngMessages", "ui.bootstrap", "ngFileUpload", "ngHamburger"]);

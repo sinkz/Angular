@@ -1,38 +1,37 @@
 <div id="wrapper">
-<div ng-include="'public/views/navBar.html'"></div>
-<div id="page-content-wrapper">
-<div class="container-fluid">  
-<div class="jumbotron">
-<div class="row">
-	<div class="col-md-8">
-		<p>{{colaborador.nome}}</p>
-		</br>
-		</br>
-		<b class="colorB">Setor:</b> {{colaborador.setor}}
-		</br>
-		</br>
-		<b class="colorB">Skype:</b> {{colaborador.userSkype}}
-		</br>
-		</br>
-		<b class="colorB">Senha Skype:</b> {{colaborador.senhaSype}}
-		</br>
-		</br>
-		<b class="colorB">Email:</b> {{colaborador.userEmail}}
-		</br>
-		</br>
-		<b class="colorB">Senha Email:</b> {{colaborador.senhaEmail}}
-		</br>
-		</br>
-		</br>
-		<a href="#/home">Voltar</a>
-	</div>
-
-	<div class="col-md-4">
-		<img src="upload/{{colaborador.arquivo}}"  class="img-responsive img " alt="Responsive image" >
- 	</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+   <hamburger-toggle state="stateModel" id="menu-toggle" href="#menu"  class="alinhaBotaoMenu"></hamburger-toggle>
+   <div ng-include="'public/views/navBar.html'"></div>
+   <div id="page-content-wrapper">
+      <div class="container-fluid">
+         <div class="jumbotron">
+            <div class="row">
+               <div class="col-md-8">
+                  <p>{{colaborador.nome}}</p>
+                  </br>
+                  </br>
+                  <b class="colorB">Setor:</b> {{colaborador.setor}}
+                  </br>
+                  </br>
+                  <b class="colorB">Skype:</b> {{colaborador.userSkype}}
+                  </br>
+                  </br>
+                  <b class="colorB">Senha Skype:</b> {{colaborador.senhaSype}}
+                  </br>
+                  </br>
+                  <b class="colorB">Email:</b> {{colaborador.userEmail}}
+                  </br>
+                  </br>
+                  <b class="colorB">Senha Email:</b> {{colaborador.senhaEmail}}
+                  </br>
+                  </br>
+                  </br>
+                  <a href="#/home">Voltar</a>
+               </div>
+               <div class="col-md-4">
+                  <img src="upload/{{colaborador.arquivo}}"  class="img-responsive img " alt="Responsive image" >
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
 </div>

@@ -6,6 +6,8 @@ angular.module("oraculo").controller("usuarioCtrl", function($scope, $routeParam
     $scope.totalItems = 60; //Dinamico
     var editar = false;
     var user = "";
+    $scope.usuario = "";
+    $scope.f = "";
 
     $scope.salvar = function(usuario) {
         if (!editar) {
@@ -54,6 +56,7 @@ angular.module("oraculo").controller("usuarioCtrl", function($scope, $routeParam
         }
         editar = false;
     }
+
 
 
     //Função pra entrar na verificação de senha(Isso evita a chamada do ng-blur caso editar seja true)
